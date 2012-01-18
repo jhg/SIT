@@ -23,12 +23,12 @@ SIT is recursive acronym of SIT Improves Tar. SIT is the file format and the
                                     SIT FORMAT
 ================================================================================
 A file in SIT format have three parts: header, files and index.
-                                    ╔══════════╗
-                                    ║  HEADER  ║
-                                    ╠══════════╣
-                                    ║  FILES   ║
-                                    ║   ...    ║
-                                    ╠══════════╣
-                                    ║  INDEX   ║
-                                    ╚══════════╝
+                                   ╔══════════╗
+                                   ║  HEADER  ║
+                                   ╠══════════╣
+                                   ║  FILES   ║
+                                   ║   ...    ║
+                                   ╠══════════╣
+                                   ║  INDEX   ║
+                                   ╚══════════╝
 
