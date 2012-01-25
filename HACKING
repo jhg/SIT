@@ -31,17 +31,19 @@ A file in SIT format have three parts: header, files and index.
                                     ║  ...   ║
                                     ╠════════╣
                                     ║ INDEX  ║
+                                    ╠════════╣
+                                    ║ MARK   ║
                                     ╚════════╝
  * Header contains information about the SIT format.
-           ╔═════════════════════════════════════════════════════════╗
-           ║                          HEADER                         ║
-           ╠══════════════════════════╦══════════════════════╦═══════╣
-           ║     formatting marks     ║       version        ║ flags ║
-           ╠══════════════════════════╬══════════════════════╬═══════╣
-           ║                          ║ 1xxxxxxx... 0xxxxxxx ║       ║
-           ║ 0x53 0x74 0x65 0x66 0x79 ║ 1xxxxxxx... 0xxxxxxx ║ 0xXX  ║
-           ║                          ║ 1xxxxxxx... 0xxxxxxx ║       ║
-           ╚══════════════════════════╩══════════════════════╩═══════╝
+            ╔═════════════════════════════════════════════════════════╗
+            ║                         HEADER                          ║
+            ╠══════════════════════════╦══════════════════════╦═══════╣
+            ║     formatting marks     ║       version        ║ flags ║
+            ╠══════════════════════════╬══════════════════════╬═══════╣
+            ║                          ║ 1xxxxxxx... 0xxxxxxx ║       ║
+            ║ 0x53 0x74 0x65 0x66 0x79 ║ 1xxxxxxx... 0xxxxxxx ║ 0xXX  ║
+            ║                          ║ 1xxxxxxx... 0xxxxxxx ║       ║
+            ╚══════════════════════════╩══════════════════════╩═══════╝
  * Files contains all the data stored in files organized according to the index
     of the archive.
 
