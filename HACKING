@@ -59,6 +59,11 @@ A file in SIT format have three parts: header, files and index.
        bits for the owner's permissions (p) to read, write and execute (0 and 1
        is not), 3 bits for permissions from the group (g) and 3 bits for permits
        for the rest (o).
+    * Struct in memory: index in memory is represented as a tree of nodes, each
+       node is an element represented by a data structure, which are linked to
+       create a dynamic list for each level of the tree, each node linking a
+       parent of the child nodes and all child nodes with her father and sibling
+       nodes.
  * Mark is a number divided into multiple bytes, and kept on file in reverse
     order every byte, that indicates where to find the index of the archive.
    Should read the bytes of the last to the first, most significant bit used to
