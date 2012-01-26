@@ -21,3 +21,16 @@ struct SIT_header
     // Flags
     char flags;
   };
+
+struct SIT_index_element
+  {
+    // Absolute path
+    char *path;
+    // Starting position (first byte)
+    unsigned long int position;
+    // Size of file (in bytes)
+    unsigned long int size;
+    // Integrity and permissions
+    char permisions[2];
+  }
+
