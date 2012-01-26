@@ -46,7 +46,15 @@ A file in SIT format have three parts: header, files and index.
             ╚══════════════════════════╩══════════════════════╩═══════╝
  * Files contains all the data stored in files organized according to the index
     of the archive.
- * Index 
+ * Index keeps all the information needed to work with files and file within the
+    archive to find them to have random access.
+          ╔═════════════════════════════════════════════════════════════╗
+          ║                            INDEX                            ║
+          ╠════════════════════╦══════╦════════════════════════╦════════╣
+          ║   absolute path    ║      ║ position of first byte ║        ║
+          ╠════════════════════╬══════╬════════════════════════╬════════╣
+          ║ directory/.../file ║ 0x00 ║  1xxxxxxx... 0xxxxxxx  ║        ║
+          ╚════════════════════╩══════╩════════════════════════╩════════╝
  * Mark is a number divided into multiple bytes, and kept on file in reverse
     order every byte, that indicates where to find the index of the archive.
    Should read the bytes of the last to the first, most significant bit used to
