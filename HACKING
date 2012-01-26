@@ -24,47 +24,47 @@ SIT is recursive acronym of SIT Improves Tar. SIT is the file format and the
 ================================================================================
 SIT format is as a TAR format but with random access and more avanced.
 A file in SIT format have three parts: header, files and index.
-                                    ╔════════╗
-                                    ║ HEADER ║
-                                    ╠════════╣
-                                    ║ FILES  ║
-                                    ║  ...   ║
-                                    ╠════════╣
-                                    ║ INDEX  ║
-                                    ╠════════╣
-                                    ║ MARK   ║
-                                    ╚════════╝
+                                   ╔════════╗
+                                   ║ HEADER ║
+                                   ╠════════╣
+                                   ║ FILES  ║
+                                   ║  ...   ║
+                                   ╠════════╣
+                                   ║ INDEX  ║
+                                   ╠════════╣
+                                   ║ MARK   ║
+                                   ╚════════╝
  * Header contains information about the SIT format.
-            ╔═════════════════════════════════════════════════════════╗
-            ║                         HEADER                          ║
-            ╠══════════════════════════╦══════════════════════╦═══════╣
-            ║     formatting marks     ║       version        ║ flags ║
-            ╠══════════════════════════╬══════════════════════╬═══════╣
-            ║                          ║ 1xxxxxxx... 0xxxxxxx ║       ║
-            ║ 0x53 0x74 0x65 0x66 0x79 ║ 1xxxxxxx... 0xxxxxxx ║ 0xXX  ║
-            ║                          ║ 1xxxxxxx... 0xxxxxxx ║       ║
-            ╚══════════════════════════╩══════════════════════╩═══════╝
+           ╔═════════════════════════════════════════════════════════╗
+           ║                         HEADER                          ║
+           ╠══════════════════════════╦══════════════════════╦═══════╣
+           ║     formatting marks     ║       version        ║ flags ║
+           ╠══════════════════════════╬══════════════════════╬═══════╣
+           ║                          ║ 1xxxxxxx... 0xxxxxxx ║       ║
+           ║ 0x53 0x74 0x65 0x66 0x79 ║ 1xxxxxxx... 0xxxxxxx ║ 0xXX  ║
+           ║                          ║ 1xxxxxxx... 0xxxxxxx ║       ║
+           ╚══════════════════════════╩══════════════════════╩═══════╝
  * Files contains all the data stored in files organized according to the index
     of the archive.
  * Index keeps all the information needed to work with files and file within the
     archive to find them to have random access.
-          ╔═════════════════════════════════════════════════════════════╗
-          ║                            INDEX                            ║
-          ╠════════════════════╦══════╦════════════════════════╦════════╣
-          ║   absolute path    ║      ║ position of first byte ║        ║
-          ╠════════════════════╬══════╬════════════════════════╬════════╣
-          ║ directory/.../file ║ 0x00 ║  1xxxxxxx... 0xxxxxxx  ║        ║
-          ╚════════════════════╩══════╩════════════════════════╩════════╝
+         ╔═════════════════════════════════════════════════════════════╗
+         ║                            INDEX                            ║
+         ╠════════════════════╦══════╦════════════════════════╦════════╣
+         ║   absolute path    ║      ║ position of first byte ║        ║
+         ╠════════════════════╬══════╬════════════════════════╬════════╣
+         ║ directory/.../file ║ 0x00 ║  1xxxxxxx... 0xxxxxxx  ║        ║
+         ╚════════════════════╩══════╩════════════════════════╩════════╝
  * Mark is a number divided into multiple bytes, and kept on file in reverse
     order every byte, that indicates where to find the index of the archive.
    Should read the bytes of the last to the first, most significant bit used to
     indicate 1 if not the last byte or 0 if it is the last to be read.
-                             ╔══════════════════════╗
-                             ║         MARK         ║
-                             ╠══════════════════════╣
-                             ║ 0xxxxxxx 1xxxxxxx... ║
-                             ╠══════════════════════╣
-                             ║ <- reading direction ║
-                             ╚══════════════════════╝
+                            ╔══════════════════════╗
+                            ║         MARK         ║
+                            ╠══════════════════════╣
+                            ║ 0xxxxxxx 1xxxxxxx... ║
+                            ╠══════════════════════╣
+                            ║ <- reading direction ║
+                            ╚══════════════════════╝
 
 
