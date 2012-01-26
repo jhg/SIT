@@ -12,6 +12,9 @@
  *   Ave, Cambridge, MA 02139, USA.
  */
 
+// HEADER //
+
+// Header of SIT file
 struct SIT_header
   {
     // Version
@@ -22,15 +25,68 @@ struct SIT_header
     char flags;
   };
 
-struct SIT_index_element
+// INDEX //
+
+// Type of element
+enum SIT_index_element_type
   {
+    undefined_type,
+    directory,
+    file
+  };
+
+// File element
+struct SIT_file_element
+  {
+    // Type
+    enum SIT_index_element_type type;
     // Absolute path
     char *path;
-    // Starting position (first byte)
-    unsigned long int position;
-    // Size of file (in bytes)
-    unsigned long int size;
+    // Name
+    char *name;
     // Integrity and permissions
     char permisions[2];
+    // Starting position (first byte)
+    unsigned long int position;
+    // Size of file in bytes (is calculated when load index)
+    unsigned long int size;
+  };
+
+// Directory element
+struct SIT_directory_element
+  {
+    // Type
+    enum SIT_index_element_type type;
+    // Absolute path
+    char *path;
+    // Name
+    char *name;
+    // Integrity and permissions
+    char permisions[2];
+    // Elements in directory
+    struct SIT_index_element *elements;
+  };
+
+// Union element
+union SIT_element
+  {
+    // Type
+    enum SIT_index_element_type type;
+    // File
+    struct SIT_file_element file;
+    // Directory
+    struct SIT_directory_element directory;
+  };
+
+// Index element
+struct SIT_index_element
+  {
+    // Element
+    union SIT_element *element;
+    // Pointers to create a doubly linked list dynamics
+    struct SIT_index_element *prev;
+    struct SIT_index_element *next;
+    // Parent element
+    struct SIT_index_element *parent;
   }
 
