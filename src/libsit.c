@@ -11,3 +11,13 @@
  *   this program; if not, write to the Free Software Foundation, Inc., 675 Mass
  *   Ave, Cambridge, MA 02139, USA.
  */
+
+struct SIT_header
+  {
+    // Version
+    unsigned long int version_major;
+    unsigned long int version_minor;
+    unsigned long int version_revision;
+    // Flags
+    char flags;
+  };
