@@ -2,17 +2,19 @@
  * SIT Copyright (C) 2011 Jesús Hernández Gormaz
  *
  * This program is free software; you can redistribute it and/or modify it under
- *   the terms of the GNU General Public License as published by the Free Software
- *   Foundation; either version 3, or (at your option) any later version.
- * This program is distributed in the hope that it will be useful, but WITHOUT ANY
- *   WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
- *   A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *   the terms of the GNU General Public License as published by the Free
+ *   Software Foundation; either version 3, or (at your option) any later
+ *   version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ *   ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ *   FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ *   more details.
  * You should have received a copy of the GNU General Public License along with
  *   this program; if not, write to the Free Software Foundation, Inc., 675 Mass
  *   Ave, Cambridge, MA 02139, USA.
  */
 
-// HEADER //
+//---------------------------------- HEADER ----------------------------------//
 
 // Header of SIT file
 struct SIT_header
@@ -25,7 +27,7 @@ struct SIT_header
     char flags;
   };
 
-// INDEX //
+//---------------------------------- INDEX -----------------------------------//
 
 // Type of element
 enum SIT_index_element_type
@@ -46,6 +48,15 @@ struct SIT_file_element
     char *name;
     // Integrity and permissions
     char permisions[2];
+    // Parent element
+    struct SIT_index_element *parent;
+    // Pointers to create a doubly linked list dynamics
+    struct SIT_index_element *prev;
+    struct SIT_index_element *next;
+    // Global list
+    struct SIT_index_element *global_prev;
+    struct SIT_index_element *global_next;
+
     // Starting position (first byte)
     unsigned long int position;
     // Size of file in bytes (is calculated when load index)
@@ -63,12 +74,21 @@ struct SIT_directory_element
     char *name;
     // Integrity and permissions
     char permisions[2];
+    // Parent element
+    union SIT_index_element *parent;
+    // Pointers to create a doubly linked list dynamics
+    union SIT_index_element *prev;
+    union SIT_index_element *next;
+    // Global list
+    union SIT_index_element *global_prev;
+    union SIT_index_element *global_next;
+
     // Elements in directory
-    struct SIT_index_element *elements;
+    union SIT_index_element *elements;
   };
 
-// Union element
-union SIT_element
+// Index element
+union SIT_index_element
   {
     // Type
     enum SIT_index_element_type type;
@@ -78,15 +98,13 @@ union SIT_element
     struct SIT_directory_element directory;
   };
 
-// Index element
-struct SIT_index_element
+//----------------------------- SIT ARCHIVE FILE -----------------------------//
+
+struct SIT_archive
   {
-    // Element
-    union SIT_element *element;
-    // Pointers to create a doubly linked list dynamics
-    struct SIT_index_element *prev;
-    struct SIT_index_element *next;
-    // Parent element
-    struct SIT_index_element *parent;
-  }
+    // Header
+    struct SIT_header *header;
+    // Index
+    struct SIT_index_element *root_directory;
+  };
 
